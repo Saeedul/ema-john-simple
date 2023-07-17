@@ -33,8 +33,18 @@ const Shop = () => {
     }, [products]) //ekhane products hocche dependency, meaning: jotobar change products hobe totobar ei useEffect take call korbe. This is called dependency injection.
 
     const handleAddToCart = (selectedProduct) => {
+        let newCart = [];
         const exists = cart.find(product => product.id === selectedProduct.id);
-        const newCart = [...cart, selectedProduct] //ekhane ekta newCart variable bole declare korlam jekhane array er moddhe aager cart er moddhe jotogulo product ase sheguloke she copy korbe, tarpor e notun ekta parameter jog korlam shekhane notun jei product ta
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct]; //ekhane ekta newCart variable ache jekhane array er moddhe aager cart er moddhe jotogulo product ase sheguloke she copy korbe, tarpor e notun ekta parameter jog korlam shekhane notun jei product ta
+        }
+        else {
+            const rest = cart.filter(product => product.id !== selectedProduct.id);
+            exists.quantity = exists.quantity = 1;
+            newCart = [...rest, exists];
+        }
+
         setCart(newCart);
         addToDb(selectedProduct.id);
     }
