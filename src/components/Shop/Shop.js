@@ -9,30 +9,33 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        console.log('products load before fetch');
+        // console.log('products load before fetch');
         fetch('products.json')
             .then(res => res.json())
             .then(data => {
                 setProducts(data)
-                console.log('products loaded');
+                // console.log('products loaded');
             })
     }, []);
 
     useEffect(() => {
-        console.log('Local Storage first line', products);
+        // console.log('Local Storage first line', products);
         const storedCart = getShoppingCart();
+        const savedCart = [];
         for (const id in storedCart) {
             const addedProduct = products.find(product => product.id === id);
             if (addedProduct) {
                 const quantity = storedCart[id];
                 addedProduct.quantity = quantity;
-                console.log(addedProduct);
+                savedCart.push(addedProduct);
             }
         }
+        setCart(savedCart);
         // console.log('local storage finished');
     }, [products]) //ekhane products hocche dependency, meaning: jotobar change products hobe totobar ei useEffect take call korbe. This is called dependency injection.
 
     const handleAddToCart = (selectedProduct) => {
+        console.log(selectedProduct);
         let newCart = [];
         const exists = cart.find(product => product.id === selectedProduct.id);
         if (!exists) {
@@ -41,7 +44,7 @@ const Shop = () => {
         }
         else {
             const rest = cart.filter(product => product.id !== selectedProduct.id);
-            exists.quantity = exists.quantity = 1;
+            exists.quantity = exists.quantity + 1;
             newCart = [...rest, exists];
         }
 
