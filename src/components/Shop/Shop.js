@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './Shop.css';
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
-import { addToDb, getShoppingCart } from '../../utilities/fakedb';
+import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fakedb';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const products = useLoaderData();
     const [cart, setCart] = useState([]);
 
-    useEffect(() => {
-        // console.log('products load before fetch');
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data)
-                // console.log('products loaded');
-            })
-    }, []);
+    const clearCart = () => {
+        setCart([]);
+        deleteShoppingCart();
+    }
 
     useEffect(() => {
         // console.log('Local Storage first line', products);
@@ -64,7 +60,11 @@ const Shop = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart cart={cart}></Cart>
+                <Cart clearCart={clearCart} cart={cart}>
+                    <Link to={"/orders"}>
+                        <button>Review Order</button>
+                    </Link>
+                </Cart>
             </div>
         </div>
         //<Cart cart={cart}></Cart> er moddhe cart={cart} mane hocche cart namer ekta props pathailam jetar value hocche ei "{cart}" ta
