@@ -9,3 +9,15 @@ AUTH SETUP
 6. export app from firebase.config.js
 
 */
+/*
+AUTH INTEGRATION
+
+1. Create user context (Auth Context): User Context --> component name. user context provides AuthContext
+2. create AuthContext
+3. set AuthContext.Provider
+4. make sure you set the children
+5. export AuthContext to be used inside useContext hook
+6. get form data
+7. getAuth in the UserContext
+8. 
+*/
