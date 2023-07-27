@@ -19,5 +19,22 @@ AUTH INTEGRATION
 5. export AuthContext to be used inside useContext hook
 6. get form data
 7. getAuth in the UserContext
-8. 
+*/
+
+/*
+Firebase Hosting
+----------------------
+Open CMD and enter this inside your react-project folder.
+1. npm install -g firebase-tools //one time for each computer
+2. firebase login // use this for first time login on a computer
+3. firebase init // use this once for each project
+4. make sure for public directory you select "build"
+5. Single page application: y
+6.Setup automatic build: n
+
+//for every deploy
+7. npm run build
+8. firebase deploy
+
+59-9 (bonus video) Host your react app to firebase
 */
