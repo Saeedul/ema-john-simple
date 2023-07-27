@@ -36,5 +36,5 @@ Open CMD and enter this inside your react-project folder.
 7. npm run build
 8. firebase deploy
 
-59-9 (bonus video) Host your react app to firebase
+59-9 (bonus video) Host your react app to fire
 */
